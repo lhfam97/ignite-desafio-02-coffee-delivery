@@ -1,7 +1,7 @@
 <img src=".github/ignite.png" alt="Ignite" >
 
 <h3 align="center">
-  Desafio 01 - Conceitos do React
+  Desafio 02 - Coffee Delivery
 </h3>
 
 <p align="center">
@@ -19,7 +19,7 @@
 ## :rocket: Sobre o desafio
 
 <p align="center">
-  <img src=".github/todo.png" alt="todo">
+  <img src=".github/Capa.png" alt="capa">
 </p>
 
 Nesse desafio, foi criada uma aplicação para treinar o que foi aprendido até agora no ReactJS, onde o seu principal objetivo é uma pequena aplicação de atividades a fazer, para treinar um pouco mais sobre manipulação do estado no React.
