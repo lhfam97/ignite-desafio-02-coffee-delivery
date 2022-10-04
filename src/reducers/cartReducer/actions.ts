@@ -1,16 +1,17 @@
-import { ProductDTO } from './reducer'
+import { Coffee } from './reducer'
 
 export enum ActionTypes {
   ADD_TO_CART = 'ADD_TO_CART',
   REMOVE_FROM_CART = 'REMOVE_FROM_CART',
   CHANGE_PRODUCT_QUANTITY = 'CHANGE_PRODUCT_QUANTITY',
+  CLEAR_CART = 'CLEAR_CART',
 }
 
-export function addToCart(product: ProductDTO, quantity: number) {
+export function addToCart(coffee: Coffee, quantity: number) {
   return {
     type: ActionTypes.ADD_TO_CART,
     payload: {
-      product,
+      coffee,
       quantity,
     },
   }
@@ -25,12 +26,21 @@ export function removeFromCart(id: number) {
   }
 }
 
-export function changeProductQuantity(id: number, quantity: number) {
+export function changeProductQuantity(
+  id: number,
+  type: 'increase' | 'decrease',
+) {
   return {
     type: ActionTypes.CHANGE_PRODUCT_QUANTITY,
     payload: {
       id,
-      quantity,
+      type,
     },
+  }
+}
+
+export function clearCart() {
+  return {
+    type: ActionTypes.CLEAR_CART,
   }
 }

@@ -3,14 +3,36 @@ import { OrderConfirmedContainer, OrderDetailsContainer } from './styles'
 import confirmedOrderIllustration from '../../assets/confirmed-order.svg'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 import { useTheme } from 'styled-components'
-import { MapPin, Clock, CurrencyDollar } from 'phosphor-react'
+import {
+  MapPin,
+  Clock,
+  CurrencyDollar,
+  CreditCard,
+  Bank,
+  Money,
+} from 'phosphor-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { OrderData } from '../CompleteOrder'
-import { paymentMethods } from '../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions'
+
 import { useEffect } from 'react'
 
 interface LocationType {
   state: OrderData
+}
+
+export const paymentMethods = {
+  credit: {
+    label: 'Cartão de crédito',
+    icon: <CreditCard size={16} />,
+  },
+  debit: {
+    label: 'Cartão de débito',
+    icon: <Bank size={16} />,
+  },
+  money: {
+    label: 'Dinheiro',
+    icon: <Money size={16} />,
+  },
 }
 
 export function OrderConfirmedPage() {

@@ -1,13 +1,10 @@
 import { TitleText } from '../../../../components/Typography'
-// import { SectionTitle } from '../SectionTitle'
 import { CompleteOrderFormContainer, FormSectionContainer } from './styles'
 import { MapPinLine, CurrencyDollar } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 import { SectionTitle } from '../SectionTitle'
-// import { AddressForm } from './AddressForm'
-import { PaymentMethodOptions } from './PaymentMethodOptions'
 import { AddressForm } from './AddressForm'
-import { PaymentMethodInput } from '../PaymentMethodInputNew'
+import { PaymentMethodInput } from '../PaymentMethodInput'
 
 export function CompleteOrderForm() {
   const { colors } = useTheme()
@@ -32,7 +29,6 @@ export function CompleteOrderForm() {
           icon={<CurrencyDollar color={colors['brand-purple']} size={22} />}
         />
         <PaymentMethodInput />
-        {/* <PaymentMethodOptions /> */}
       </FormSectionContainer>
     </CompleteOrderFormContainer>
   )

@@ -1,25 +1,49 @@
-import { forwardRef, InputHTMLAttributes, ReactNode } from 'react'
-import { ContentContainer, PaymentMethodContainer } from './styles'
+import { Bank, CreditCard, Money } from 'phosphor-react'
+import { Controller, useFormContext } from 'react-hook-form'
+import { RegularText } from '../../../../components/Typography'
+import {
+  TransactionType,
+  TransactionTypeButton,
+  PaymentMethodContainer,
+} from './styles'
 
-type PaymentMethodInputProps = InputHTMLAttributes<HTMLInputElement> & {
-  icon: ReactNode
-  label: string
-}
+export const PaymentMethodInput = () => {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext()
 
-// eslint-disable-next-line react/display-name
-export const PaymentMethodInput = forwardRef<
-  HTMLInputElement,
-  PaymentMethodInputProps
->(({ id, icon, label, ...props }, ref) => {
+  const paymentMethodError = errors?.paymentMethod?.message as unknown as string
+
   return (
-    <PaymentMethodContainer>
-      <input id={id} type="radio" {...props} name="paymentMethod" ref={ref} />
-      <label htmlFor={id}>
-        <ContentContainer>
-          {icon}
-          {label}
-        </ContentContainer>
-      </label>
-    </PaymentMethodContainer>
+    <Controller
+      control={control}
+      name="paymentMethod"
+      render={({ field }) => {
+        return (
+          <PaymentMethodContainer>
+            <TransactionType onValueChange={field.onChange} value={field.value}>
+              <TransactionTypeButton value="credit">
+                <CreditCard size={16} />
+                Cartão de Crédito
+              </TransactionTypeButton>
+              <TransactionTypeButton value="debit">
+                <Bank size={16} />
+                Cartão de Débito
+              </TransactionTypeButton>
+              <TransactionTypeButton value="money">
+                <Money size={16} />
+                Dinheiro
+              </TransactionTypeButton>
+            </TransactionType>
+            {paymentMethodError && (
+              <RegularText className="form-error">
+                {paymentMethodError}
+              </RegularText>
+            )}
+          </PaymentMethodContainer>
+        )
+      }}
+    />
   )
-})
+}

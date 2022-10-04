@@ -1,9 +1,9 @@
 import { produce } from 'immer'
 
 import { ActionTypes } from './actions'
-export interface Product {
+export interface cartItems {
   id: number
-  title: string
+  name: string
   price: number
   description: string
   tags: string[]
@@ -11,9 +11,9 @@ export interface Product {
   quantity: number
 }
 
-export interface ProductDTO {
+export interface Coffee {
   id: number
-  title: string
+  name: string
   price: number
   description: string
   tags: string[]
@@ -21,33 +21,33 @@ export interface ProductDTO {
 }
 
 interface CartState {
-  cart: Product[]
+  cartItems: cartItems[]
 }
 
 export function cartReducer(state: CartState, action: any) {
   switch (action.type) {
     case ActionTypes.ADD_TO_CART:
       return produce(state, (draft) => {
-        const productIndex = state.cart.findIndex((product) => {
-          return product.id === action.payload.product.id
+        const productIndex = state.cartItems.findIndex((coffee) => {
+          return coffee.id === action.payload.coffee.id
         })
 
         if (productIndex > -1) {
-          draft.cart[productIndex].quantity = action.payload.quantity
+          draft.cartItems[productIndex].quantity = action.payload.quantity
         } else {
-          draft.cart.push({
-            ...action.payload.product,
+          draft.cartItems.push({
+            ...action.payload.coffee,
             quantity: action.payload.quantity,
           })
         }
       })
     case ActionTypes.REMOVE_FROM_CART: {
-      const productIndex = state.cart.findIndex((product) => {
+      const productIndex = state.cartItems.findIndex((product) => {
         return product.id === action.payload.id
       })
       return produce(state, (draft) => {
         if (productIndex > -1) {
-          draft.cart.splice(productIndex, 1)
+          draft.cartItems.splice(productIndex, 1)
         } else {
           return state
         }
@@ -55,18 +55,23 @@ export function cartReducer(state: CartState, action: any) {
     }
     case ActionTypes.CHANGE_PRODUCT_QUANTITY: {
       return produce(state, (draft) => {
-        const productIndex = state.cart.findIndex((product) => {
-          return product.id === action.payload.product.id
+        const productIndex = state.cartItems.findIndex((product) => {
+          return product.id === action.payload.id
         })
 
         if (productIndex > -1) {
-          draft.cart[productIndex].quantity = action.payload.quantity
-        } else {
-          draft.cart.push({
-            ...action.payload.product,
-            quantity: action.payload.quantity,
-          })
+          const item = draft.cartItems[productIndex]
+          draft.cartItems[productIndex].quantity =
+            action.payload.type === 'increase'
+              ? item.quantity + 1
+              : item.quantity - 1
         }
+      })
+    }
+
+    case ActionTypes.CLEAR_CART: {
+      return produce(state, (draft) => {
+        draft.cartItems = []
       })
     }
     default:

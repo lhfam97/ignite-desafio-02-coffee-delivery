@@ -43,11 +43,7 @@ export const CoffeeCard = ({ coffee }: CoffeeCardProps) => {
   const { addCoffeeToCart } = useCart()
 
   function handleAddToCart() {
-    const coffeeToAdd = {
-      ...coffee,
-      quantity,
-    }
-    addCoffeeToCart(coffeeToAdd)
+    addCoffeeToCart(coffee, quantity)
   }
 
   const formattedPrice = formatMoney(coffee.price)
