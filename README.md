@@ -55,7 +55,7 @@ Para completar esse desafio, você pode necessitar de pesquisas para aprender so
 
 ```bash
 # Abra um terminal e copie este repositório com o comando
-git clone https://github.com/lhfam97ignite-desafio-02-coffee-delivery/
+git clone https://github.com/lhfam97/ignite-desafio-02-coffee-delivery/
 # ou use a opção de download.
 
 # Entre na pasta da aplicação 
